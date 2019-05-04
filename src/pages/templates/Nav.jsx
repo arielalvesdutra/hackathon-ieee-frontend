@@ -20,7 +20,7 @@ const Nav = () => (
     <nav className="Nav">
         <ul className="">
             <NavItem to="/" text="Dashboard" />
-            <NavItem to="/" text="Emitir Alerta" />
+            <NavItem to="/emit-alert" text="Emitir Alerta" />
         </ul>
     </nav>
 )
