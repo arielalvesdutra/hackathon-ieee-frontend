@@ -27,6 +27,12 @@
     display: flex;
 }
 
+.Nav .active {
+    box-sizing: border-box;
+    border-bottom: 3px solid red;
+    background-color: firebrick;
+}
+
 .Nav ul {
     margin: 0px;
     padding: 0px;

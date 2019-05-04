@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 
 import './Nav.css'
 
-const pathname = window.location.pathname
-
-console.log(pathname)
+let pathname = window.location.pathname
 
 const NavItem = ({ to, text }) => (
     <li className="">
@@ -16,13 +14,17 @@ const NavItem = ({ to, text }) => (
     </li>
 )
 
-const Nav = () => (
-    <nav className="Nav">
-        <ul className="">
-            <NavItem to="/" text="Dashboard" />
-            <NavItem to="/emit-alert" text="Emitir Alerta" />
-        </ul>
-    </nav>
-)
+const Nav = () => {
+    pathname = window.location.pathname
+
+    return (
+        <nav className="Nav">
+            <ul className="">
+                <NavItem to="/" text="Dashboard" />
+                <NavItem to="/alarm-creation" text="Criação de Alarmes" />
+            </ul>
+        </nav>
+    )
+}
 
 export default Nav

@@ -1,0 +1,8 @@
+input {
+    padding: 5px 5px 5px 10px;
+}
+
+.date-span {
+    font-size: 1.2em;
+    font-weight: bold;
+}
