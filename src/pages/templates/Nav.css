@@ -1,0 +1,35 @@
+.Nav {
+    background-color: crimson;
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    padding: 0px 0px 0px 50px;
+    
+}
+
+.Nav a {
+    color: white;
+    background-color: darkred;
+    /* margin: 0px; */
+    /* height: 30px; */
+    padding: 15px;
+    /* font-weight: bold; */
+}
+.Nav a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: firebrick;
+}
+
+.Nav li {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.Nav ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+}
