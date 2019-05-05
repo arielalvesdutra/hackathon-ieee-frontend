@@ -195,7 +195,7 @@ class DashboardPage extends Component {
             }
         })
 
-        const MyChart = ({ data, dataKey }) =>
+        const MyChart = ({ data, dataKey }) => 
             (
                 <LineChart width={300} height={250} data={data}>
                     <Line type="monotone" dataKey={dataKey ? dataKey : 'uv'} stroke="#8884d8" />
@@ -205,7 +205,7 @@ class DashboardPage extends Component {
                     <XAxis dataKey="name" />
                     <YAxis />
                 </LineChart>
-            )
+        )
 
         return (
             <div className="App d-flex flex-column align-items-center justify-content-between">
