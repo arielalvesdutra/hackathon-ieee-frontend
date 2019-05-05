@@ -6,3 +6,9 @@ input {
     font-size: 1.2em;
     font-weight: bold;
 }
+
+.chart-area {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
