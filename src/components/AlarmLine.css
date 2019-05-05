@@ -8,3 +8,7 @@
     color: darkred;
     box-shadow: 3px 3px 3px;
 }
+
+a {
+    background-color: darkred;
+}

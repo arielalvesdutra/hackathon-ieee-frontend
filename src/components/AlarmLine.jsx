@@ -1,5 +1,9 @@
 import React from 'react'
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
+
 import './AlarmLine.css'
 
 const AlarmLine = ({ limitType, variable, value }) => (
@@ -16,8 +20,12 @@ const AlarmLine = ({ limitType, variable, value }) => (
             </span>
         </div>
         <div className="col-4 d-flex justify-content-end">
-            <button className="btn bg-warning">Editar</button>
-            <button className="btn btn-default bg-danger ml-2">Remover</button>
+            <a >
+                <FontAwesomeIcon icon={faEdit} />
+            </a>
+            <a className="ml-4 mr-2">
+                <FontAwesomeIcon icon={faTrash} />
+            </a>
         </div>
     </div>
 )
