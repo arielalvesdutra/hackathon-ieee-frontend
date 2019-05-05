@@ -28,8 +28,7 @@ class DashboardPage extends Component {
         potenciasReativas: [],
         potenciasAparentes: [],
         fatoresPotencias: [],
-        energiasAcumuladdas: []
-
+        energiasAcumuladas: []
     }
 
     fetchEletricalQuantities = event => {
@@ -70,8 +69,31 @@ class DashboardPage extends Component {
                                 potenciaAtiva: record.potencia_ativa,
                                 dataCriacao: record.data_criacao
                             }
-                        }
-                        )
+                        }),
+                        potenciasReativas: data.map(record => {
+                            return {
+                                potenciaReativa: record.potencia_reativa,
+                                dataCriacao: record.data_criacao
+                            }
+                        }),
+                        potenciasAparentes: data.map(record => {
+                            return {
+                                potenciaAparente: record.potencia_aparente,
+                                dataCriacao: record.data_criacao
+                            }
+                        }),
+                        fatoresPotencias: data.map(record => {
+                            return {
+                                fatorPotencial: record.fator_potencia,
+                                dataCriacao: record.data_criacao
+                            }
+                        }),
+                        energiasAcumuladas: data.map(record => {
+                            return {
+                                energiaAcumulada: record.energia_acumulada,
+                                dataCriacao: record.data_criacao
+                            }
+                        })
                     })
                 })
                 .catch(error => error)
@@ -97,8 +119,6 @@ class DashboardPage extends Component {
         })
     }
 
-
-
     validadeEletricalQuantitiesForm = () => {
         if (this.state.initialDate.lenth <= 0) {
             throw Error('Data inicial não preenchida')
@@ -111,11 +131,6 @@ class DashboardPage extends Component {
 
     render() {
         console.log(this.state)
-        const correntes = this.state.correntes.map((corrente, key) => (
-            <div key={key}>
-                {corrente}
-            </div>
-        ))
 
         const dadosCorrentes = this.state.correntes.map(record => {
             return {
@@ -135,6 +150,24 @@ class DashboardPage extends Component {
             }
         })
 
+        const dadosPotenciasAparentes = this.state.potenciasAparentes.map(record => {
+            return {
+                name: record.dataCriacao,
+                uv: record.potenciaAparente,
+                pv: 2400,
+                amt: 2400
+            }
+        })
+
+        const dadosPotenciaisReativas = this.state.potenciasReativas.map(record => {
+            return {
+                name: record.dataCriacao,
+                uv: record.potenciaReativa,
+                pv: 2400,
+                amt: 2400
+            }
+        })
+
         const dadosTensoes = this.state.tensoes.map(tensao => {
             return {
                 name: tensao.dataCriacao,
@@ -144,12 +177,23 @@ class DashboardPage extends Component {
             }
         })
 
+        const dadosFatorPotencial = this.state.fatoresPotencias.map(record => {
+            return {
+                name: record.dataCriacao,
+                uv: record.fatorPotencial,
+                pv: 2400,
+                amt: 2400
+            }
+        })
 
-        const data = [
-            { name: 'Page A', uv: 250, pv: 2400, amt: 2400 },
-            { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },
-            { name: 'Page A', uv: 300, pv: 1000, amt: 2400 }
-        ];
+        const dadosEnergiaAcumulada = this.state.energiasAcumuladas.map(record => {
+            return {
+                name: record.dataCriacao,
+                uv: record.energiaAcumulada,
+                pv: 2400,
+                amt: 2400
+            }
+        })
 
         const MyChart = ({ data }) => (
             <LineChart width={300} height={250} data={data}>
@@ -194,16 +238,6 @@ class DashboardPage extends Component {
                     <hr />
                     <div className="chart-area">
 
-                        {/* {correntes.length
-                            ? (<div>
-                                <div>
-                                    Correntes:
-                            </div>
-                                {correntes}
-                            </div>
-                            )
-                            : ''} */}
-
                         {dadosCorrentes.length
                             ? (<div> Correntes:
                                 <MyChart data={dadosCorrentes} />
@@ -211,7 +245,6 @@ class DashboardPage extends Component {
                             )
                             : ''
                         }
-
 
                         {dadosTensoes.length
                             ? (<div> Tensões:
@@ -224,6 +257,38 @@ class DashboardPage extends Component {
                         {dadosPotenciasAtivas.length
                             ? (<div> Potências ativas:
                                 <MyChart data={dadosPotenciasAtivas} />
+                            </div>
+                            )
+                            : ''
+                        }
+
+                        {dadosPotenciasAparentes.length
+                            ? (<div> Potências ativas:
+                                <MyChart data={dadosPotenciasAparentes} />
+                            </div>
+                            )
+                            : ''
+                        }
+
+                        {dadosPotenciaisReativas.length
+                            ? (<div> Potências reativas:
+                                <MyChart data={dadosPotenciaisReativas} />
+                            </div>
+                            )
+                            : ''
+                        }
+
+                        {dadosFatorPotencial.length
+                            ? (<div> Fator potencial:
+                                <MyChart data={dadosFatorPotencial} />
+                            </div>
+                            )
+                            : ''
+                        }
+
+                        {dadosEnergiaAcumulada.length
+                            ? (<div> Fator potencial:
+                                <MyChart data={dadosEnergiaAcumulada} />
                             </div>
                             )
                             : ''
