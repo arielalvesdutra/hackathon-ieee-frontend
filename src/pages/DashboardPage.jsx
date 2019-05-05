@@ -8,7 +8,7 @@ import Content from './templates/Content'
 import Footer from './templates/Footer'
 import Header from './templates/Header'
 
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ReferenceLine } from 'recharts';
 
 import FormButton from '../components/FormButton'
 import { backendUrl } from '../backend'
@@ -135,7 +135,7 @@ class DashboardPage extends Component {
         const dadosCorrentes = this.state.correntes.map(record => {
             return {
                 name: record.dataCriacao,
-                uv: record.corrente,
+                A: record.corrente,
                 pv: 2400,
                 amt: 2400
             }
@@ -144,7 +144,7 @@ class DashboardPage extends Component {
         const dadosPotenciasAtivas = this.state.potenciasAtivas.map(potencia => {
             return {
                 name: potencia.dataCriacao,
-                uv: potencia.potenciaAtiva,
+                W: potencia.potenciaAtiva,
                 pv: 2400,
                 amt: 2400
             }
@@ -153,7 +153,7 @@ class DashboardPage extends Component {
         const dadosPotenciasAparentes = this.state.potenciasAparentes.map(record => {
             return {
                 name: record.dataCriacao,
-                uv: record.potenciaAparente,
+                VA: record.potenciaAparente,
                 pv: 2400,
                 amt: 2400
             }
@@ -162,7 +162,7 @@ class DashboardPage extends Component {
         const dadosPotenciaisReativas = this.state.potenciasReativas.map(record => {
             return {
                 name: record.dataCriacao,
-                uv: record.potenciaReativa,
+                VAr: record.potenciaReativa,
                 pv: 2400,
                 amt: 2400
             }
@@ -171,7 +171,7 @@ class DashboardPage extends Component {
         const dadosTensoes = this.state.tensoes.map(tensao => {
             return {
                 name: tensao.dataCriacao,
-                uv: tensao.tensao,
+                V: tensao.tensao,
                 pv: 2400,
                 amt: 2400
             }
@@ -189,20 +189,23 @@ class DashboardPage extends Component {
         const dadosEnergiaAcumulada = this.state.energiasAcumuladas.map(record => {
             return {
                 name: record.dataCriacao,
-                uv: record.energiaAcumulada,
+                J: record.energiaAcumulada,
                 pv: 2400,
                 amt: 2400
             }
         })
 
-        const MyChart = ({ data }) => (
-            <LineChart width={300} height={250} data={data}>
-                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <XAxis dataKey="name" />
-                <YAxis />
-            </LineChart>
-        )
+        const MyChart = ({ data, dataKey }) =>
+            (
+                <LineChart width={300} height={250} data={data}>
+                    <Line type="monotone" dataKey={dataKey ? dataKey : 'uv'} stroke="#8884d8" />
+                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                    <Legend />
+                    <Tooltip />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                </LineChart>
+            )
 
         return (
             <div className="App d-flex flex-column align-items-center justify-content-between">
@@ -239,40 +242,40 @@ class DashboardPage extends Component {
                     <div className="chart-area">
 
                         {dadosCorrentes.length
-                            ? (<div> Correntes:
-                                <MyChart data={dadosCorrentes} />
+                            ? (<div> Corrente (Arms):
+                                <MyChart data={dadosCorrentes} dataKey="A" />
                             </div>
                             )
                             : ''
                         }
 
                         {dadosTensoes.length
-                            ? (<div> Tensões:
-                                <MyChart data={dadosTensoes} />
+                            ? (<div> Tensão (Vrms):
+                                <MyChart data={dadosTensoes} dataKey="V" />
                             </div>
                             )
                             : ''
                         }
 
                         {dadosPotenciasAtivas.length
-                            ? (<div> Potências ativas:
-                                <MyChart data={dadosPotenciasAtivas} />
+                            ? (<div> Potências ativa (W):
+                                <MyChart data={dadosPotenciasAtivas} dataKey="W" />
                             </div>
                             )
                             : ''
                         }
 
                         {dadosPotenciasAparentes.length
-                            ? (<div> Potências ativas:
-                                <MyChart data={dadosPotenciasAparentes} />
+                            ? (<div> Potência aparente (VA):
+                                <MyChart data={dadosPotenciasAparentes} dataKey="VA" />
                             </div>
                             )
                             : ''
                         }
 
                         {dadosPotenciaisReativas.length
-                            ? (<div> Potências reativas:
-                                <MyChart data={dadosPotenciaisReativas} />
+                            ? (<div> Porência reativa (VAr):
+                                <MyChart data={dadosPotenciaisReativas} dataKey="VAr" />
                             </div>
                             )
                             : ''
@@ -287,8 +290,8 @@ class DashboardPage extends Component {
                         }
 
                         {dadosEnergiaAcumulada.length
-                            ? (<div> Fator potencial:
-                                <MyChart data={dadosEnergiaAcumulada} />
+                            ? (<div> Energia acumulada (J):
+                                <MyChart data={dadosEnergiaAcumulada} dataKey="J" />
                             </div>
                             )
                             : ''
