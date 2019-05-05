@@ -1,0 +1,10 @@
+.AlarmLine {
+    padding: 15px;
+    margin: 10px;
+    background-color: #ccc;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    color: darkred;
+    box-shadow: 3px 3px 3px;
+}
